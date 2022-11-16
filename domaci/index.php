@@ -38,7 +38,7 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
-  <title>OnePage Bootstrap Template - Index</title>
+  <title>Gym Membership Management System</title>
 </head>
 <body>
   <header id="header" class="fixed-top">

@@ -2,34 +2,42 @@
 
 class Membership
 {
-    public DateTime $start;
-    public $status;
-    public ?Member $member;
-    public ?MembershipType $membershiptype;
+    public $id;
+    public $type;
+    public $fee;
+    public $duracion;
 
-    public function __construct(DateTime $start = null, $status = null, ?Member $member = null, ?MembershipType $membershiptype = null)
+    public function __construct( $id = null, $type = null, $fee = null, $duration = null)
     {
-        $this->start = $start;
-        $this->status = $status;
-        $this->member = $member;
-        $this->membershiptype = $membershiptype;    
+        $this->id = $id;
+        $this->type = $type;  
+        $this->fee = $fee;
+        $this->duracion = $duration;  
     }
 
     public static function getAll(mysqli $conn)
     {
+
         $query = "SELECT * FROM membership";
 
-        if(!$result = $conn->query($query)) {
-            echo "Error occured while trying to get all records";
+        $result = $conn->query($query);
+
+        if(!$result) 
+        {
+            echo "Error occured while trying to get all records from 'membership'.";
             return null;
         } 
-        elseif($result->num_rows == 0){
-            echo 'There are no memberships in database to show.';
+
+        elseif($result->num_rows == 0)
+        {
+            echo "There are no records in table 'membership' to show.";
             return null;
-        } else {
+        } 
+        else 
+        {
             $memberships = array();
             while($row = $result->fetch_array()){
-                $membership = new Membership($row["MemberID"], $row["MembershipID"], $row["StartDate"], $row["Status"], $row["Fee"]);
+                $membership = new Membership($row["id"], $row["type"], $row["fee"], $row["duration"]);
                 array_push($memberships, $membership);
             }
             return $memberships;

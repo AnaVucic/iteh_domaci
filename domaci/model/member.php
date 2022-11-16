@@ -11,7 +11,7 @@ Class Member
     {
         $this->id = $id;
         $this->firstname = $firstname;
-        $this->lastname = $lastname;        
+        $this->lastname = $lastname;       
     }
 
     public static function getAll(mysqli $conn)
@@ -19,16 +19,16 @@ Class Member
         $query = "SELECT * FROM member";
 
         if(!$result = $conn->query($query)) {
-            echo "Error occured while trying to get all records";
+            echo "Error occured while retrievein records from 'member'.";
             return null;
         } 
         elseif($result->num_rows == 0){
-            echo 'There are no members in database to show.';
+            echo "There are no records in 'member' to show.";
             return null;
         } else {
             $members = array();
             while($row = $result->fetch_array()){
-                $member = new Member($row["MemberID"], $row["Firstname"], $row["Lastname"]);
+                $member = new Member($row["id"], $row["firstname"], $row["lastname"]);
                 array_push($members, $member);
             }
             return $members;
